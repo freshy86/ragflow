@@ -759,7 +759,7 @@ func emit(
 // expired mid-investigation, so inheriting that deadline would guarantee its
 // failure — q268 shipped a 60-char narration sentence because the final
 // synthesis call was itself killed by the budget that had just run out.
-const finalizeTimeout = 90 * time.Second
+const finalizeTimeout = 60 * time.Minute
 
 // finalizeEvidenceMaxRunes caps the evidence block handed to the synthesis
 // call. Tool outputs accumulate 4KB each; without a cap a long investigation

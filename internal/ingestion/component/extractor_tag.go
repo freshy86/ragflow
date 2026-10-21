@@ -60,7 +60,7 @@ const (
 
 const taggerLLMConcurrency = 8
 
-var taggerTimeout = 60 * time.Second
+var taggerTimeout = 60 * time.Minute
 
 const taggerPromptTmpl = `## Role
 You are a text analyzer.

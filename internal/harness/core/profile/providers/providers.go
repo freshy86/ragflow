@@ -27,7 +27,7 @@ import (
 // Shared HTTP helpers
 // ========================================================================
 
-const defaultTimeout = 60 * time.Second
+const defaultTimeout = 60 * time.Minute
 
 type httpClient interface {
 	Do(req *http.Request) (*http.Response, error)

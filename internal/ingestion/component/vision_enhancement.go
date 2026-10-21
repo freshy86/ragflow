@@ -55,9 +55,10 @@ var (
 const (
 	visionEnhancementConcurrency int = 10
 	// visionChatTimeout bounds a single VLM call so a hung endpoint cannot
-	// occupy one of the concurrency slots indefinitely. Python wraps the
-	// per-image call in @timeout(30, 3) (deepdoc/parser/figure_parser.py).
-	visionChatTimeout     = 30 * time.Second
+	// occupy one of the concurrency slots indefinitely. Local backends
+	// (Ollama et al.) only flush response headers after inference completes,
+	// so the budget must cover slow local generation.
+	visionChatTimeout     = 60 * time.Minute
 	visionMediaItemBudget = 10 * time.Second
 )
 
