@@ -39,6 +39,14 @@ services:
       - ./entrypoint.sh:/ragflow/entrypoint.sh
       # - ${RAGFLOW_SSH_KNOWN_HOSTS:-${HOME}/.ssh/known_hosts}:${SSH_KNOWN_HOSTS:-/etc/ragflow/ssh_known_hosts}:ro
     env_file: .env
+    # Cap Docker's own stdout capture (json-file driver is unbounded by
+    # default). The Go services rotate their files in ./ragflow-logs
+    # independently via lumberjack; this bounds the duplicate `docker logs` copy.
+    logging:
+      driver: json-file
+      options:
+        max-size: "100m"
+        max-file: "10"
     # Route the Go services' cache/queue backend to the separate Kvrocks service.
     # The Python services use the Valkey `redis` service, which the Go deployment
     # disables (see the `redis` profile override above). KVROCKS_HOST/KVROCKS_PORT
